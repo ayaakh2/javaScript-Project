@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="add_exam">
+        <form id="exam">
+            <div>
+            <label>title</label>
+            <input id="title" type="text">
+            </div>
+            
+            <div>
+            <label>date</label>
+            <input id="date" type="date">
+            </div>
+            
+            <div>
+            <label>time</label>
+            <input id="time" type="datetime">
+            </div>
+
+            <div>
+            <label></label>
+            <div id="All_questions">d</div>
+            </div>
+
+            <input id="add_exam" type="button" value="add Exam">
+        </form>
+        <hr>
+        <form id="questions">
+            <div>
+            <label>type</label>
+            <select id="type">
+                <option value="MCQ">MCQ</option>
+                <option value="Short_Answer">Short Answer</option>
+                <option value="true/false">true/false</option>
+                <option value="Multiple">Multiple answers</option>
+            </select>
+            </div>
+
+            <div>
+            <label>questionText</label>
+            <input id="questionText" type="text">
+            </div>
+        
+            <div>
+            <label>options <small>Use , to separate</small></label>
+            <input id="options" type="text">
+            </div>
+        
+            <div>
+            <label>correctAnswer<small>Use , to separate</small></label>
+            <input id="correctAnswer" type="text">
+            </div>
+
+            <input id="add_questions" type="button" value="add questions">
+            <input id="edit_question" type="button" value="Edit questions" style="display: none;">
+        </form>
+    </div>
+    <hr>
+    <div id="exams">
+        
+    </div>
+
+    <hr>
+    <script src="script.js"></script>
+</body>
+</html>
