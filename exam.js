@@ -38,7 +38,7 @@ const Exams=JSON.parse(localStorage.getItem("exams"))||[];
 function display_exams(){
     const Exams=JSON.parse(localStorage.getItem("exams"))||[];
     let text=``;
-     let isFind=false;
+    let isFind=false;
     Exams.forEach((exam,index)=>{
          isFind=true;
          text+=`<tr>
@@ -47,6 +47,7 @@ function display_exams(){
          <td>${exam.date}</td>
          <td>${exam.time}</td>
          <td><input type="checkbox" ${exam.status=="active"?"checked":""} onclick="Toggle_active_exam(${index})"></td> 
+         <td onclick="Display_questions_by_exam(${index})">show</td>
          <td onclick="Display_questions_by_exam(${index})">show</td>
          </tr>`;
     })
