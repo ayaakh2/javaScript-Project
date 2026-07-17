@@ -220,7 +220,7 @@ h3, h4 {
   font-size: 1.25rem;
 }
 
-/*   5. Cards   */
+/*  Cards   */
 .card {
   background: var(--c-surface);
   border: 1px solid var(--c-border);
