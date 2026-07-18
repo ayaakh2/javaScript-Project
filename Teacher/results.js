@@ -19,7 +19,7 @@ function display_results(){
             <td>${result.score} /${result.totalScore}</td>
             <td>${result.status}</td>
             <td>${result.date}</td>
-            <td onclick="answer_by_exam(${index})">show</td>
+            <td onclick="answer_by_exam(${index})"  data-bs-toggle="modal" data-bs-target="#myModal" class="btn btn--accent" >show</td>
         </tr>`;
     });
 

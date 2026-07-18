@@ -3,6 +3,9 @@ const date=document.getElementById("date");
 const time=document.getElementById("time");
 const All_questions=document.getElementById("All_questions");
 const btn_add_exam=document.getElementById("add_exam");
+const btn_edit_exam=document.getElementById("edit_exam");
+const btn_add_new_question=document.getElementById("add_new_question");
+const btn_add_popup=document.getElementById("add");
 const show=document.getElementById("exams");
 
 const type=document.getElementById("type");
@@ -11,15 +14,31 @@ const options=document.getElementById("options");
 const correctAnswer=document.getElementById("correctAnswer");
 const add_questions=document.getElementById("add_questions");
 const edit_questions=document.getElementById("edit_question");
+const show_questions=document.getElementById("questions");
 let arr_questions=[];
+
 /*Exam*/
 display_exams();
+btn_add_popup.onclick=function(){
+    title.value=``;
+    date.value=``;
+    time.value=``;
+    All_questions.innerHTML=`<table>
+                <tr>
+                      <th>#</th>
+                    <th>type</th>
+                    <th>question Text</th>
+                    <th>options</th>
+                    <th>correct Answer</th>
+                </tr>
+              </table>`;
+;}
+
+
 btn_add_exam.onclick=function(){
     add_exam();
     display_exams();
 }
-
-
 function add_exam(){
 const Exams=JSON.parse(localStorage.getItem("exams"))||[];
     const exam= {
@@ -47,8 +66,8 @@ function display_exams(){
          <td>${exam.date}</td>
          <td>${exam.time}</td>
          <td><input type="checkbox" ${exam.status=="active"?"checked":""} onclick="Toggle_active_exam(${index})"></td> 
-         <td onclick="Display_questions_by_exam(${index})">show</td>
-         <td onclick="Display_questions_by_exam(${index})">show</td>
+         <td onclick="Display_questions_by_exam(${index})"  data-bs-toggle="modal" data-bs-target="#myModal">show</td>
+         <td onclick="befor_edit_form(${index})"  data-bs-toggle="modal" data-bs-target="#myModal">edit</td>
          </tr>`;
     })
 
@@ -56,7 +75,7 @@ function display_exams(){
         show.innerHTML=`Sorry, we couldn't find any Exams.`;
     else
         show.innerHTML=`<table>
-                <tr><th>#</th><th>Title</th><th>Date</th><th>Time</th><th>status</th><th>Actions</th></tr>    
+                <tr><th>#</th><th>Title</th><th>Date</th><th>Time</th><th>status</th><th colspan=2>Actions</th></tr>    
                 ${text}</table>`;
 }
 function Display_questions_by_exam(id){
@@ -97,16 +116,56 @@ function Toggle_active_exam(id) {
     localStorage.setItem("exams",JSON.stringify(Exams));
     location.reload();
 }
+function befor_edit_form(id){
+    btn_add_exam.style.display="none";
+    btn_edit_exam.style.display="block";
+    sessionStorage.setItem("id_edit",id+"")
+    const Exams=JSON.parse(localStorage.getItem("exams"))||[];
+    title.value=Exams[id].title;
+    date.value=Exams[id].date;
+    time.value=Exams[id].time;
+    arr_questions=Exams[id].questions.map((question,index)=>{
+         const edit_question2= {
+        "questionId": index,
+        "type": question.type,
+        "questionText":question.questionText,
+        "options":String(question.options).split(","),
+        "correctAnswer": String(question.correctAnswer).split(",")
+    }  
+        return edit_question2;
+    })
+    Display_question_in_form();
+   
+}
+btn_edit_exam.onclick=function(){
+    edit_exam();
+}
+function edit_exam() {
+    id=Number(sessionStorage.getItem("id_edit"));
+    const Exams=JSON.parse(localStorage.getItem("exams"))||[];
+    Exams[id].title=title.value;
+    Exams[id].time=time.value;
+    Exams[id].date=date.value;
+    Exams[id].questions=arr_questions;
+    localStorage.setItem("exams",JSON.stringify(Exams));
+    
+    btn_add_exam.style.display="block";
+    btn_edit_exam.style.display="none";
+    location.reload();
 
+}
+
+btn_add_new_question.onclick=function(){
+    show_questions.style.display="block";
+}
 
 /*Questions*/
-
 let id_edit=-1;
 add_questions.onclick=function(){
     add_question_in_form();
     Display_question_in_form();
+   // show_questions.style.display="none"
 }
-
 function add_question_in_form() {
     const question= {
         "questionId": arr_questions.length,
@@ -117,6 +176,35 @@ function add_question_in_form() {
     }
     arr_questions.push(question);
 }
+function Display_question_in_form_by_exam(id) {
+    const Exams=JSON.parse(localStorage.getItem("exams"))||[];
+    let text=``;
+    Exams[id].questions.forEach((question,index)=>{
+        text+=`<tr>
+            <td>${index+1}</td>
+            <td>${question.type}</td>
+            <td>${question.questionText}</td>
+            <td>${question.options}</td>
+            <td>${question.correctAnswer}</td>
+            <td onclick="delete_question_from_form(${index})">X</td>
+            <td onclick="befor_edit_question_from_form(${index})">edit</td>
+        </tr>`
+    })
+    
+    All_questions.innerHTML=`
+    <table>
+        <tr>
+            <th>#</th>
+            <th>type</th>
+            <th>question Text</th>
+            <th>options</th>
+            <th>correct Answer</th>
+            <th colspan="2">Action</th>
+        </tr>
+        ${text}
+    </table>
+    `
+};
 function Display_question_in_form() {
     let text=``;
     arr_questions.forEach((question,index)=>{
@@ -127,7 +215,7 @@ function Display_question_in_form() {
             <td>${question.options}</td>
             <td>${question.correctAnswer}</td>
             <td onclick="delete_question_from_form(${index})">X</td>
-            <td onclick="befor_edit_question(${index})">edit</td>
+            <td onclick="befor_edit_question_from_form(${index})">edit</td>
         </tr>`
     })
     
@@ -150,7 +238,7 @@ edit_questions.onclick=function(){
     Display_question_in_form();
     id_edit=-1;
 }
-function befor_edit_question(id){
+function befor_edit_question_from_form(id){
     id_edit=id;
     type.value=arr_questions[id].type;
     questionText.value=arr_questions[id].questionText;

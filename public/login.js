@@ -44,10 +44,10 @@ loginForm.onsubmit = function (event) {
 
     if (foundUser.role === "teacher") {
       // alert("Welcome, Teacher " + foundUser.fullName);
-      window.location.href = "Thacher/dashboard.html";
+      window.location.href = "../Teacher/dashboard.html";
     } else if (foundUser.role === "student") {
       //   alert("Welcome, Student " + foundUser.fullName);
-      window.location.href = "student/dashboard.html";
+      window.location.href = "../student/student-dashboard.html";
     }
   } else {
     if (wrongAlert) {
