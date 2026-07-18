@@ -5,69 +5,50 @@ const statIncomplete = document.getElementById("statIncomplete");
 const examGrid = document.getElementById("examGrid");
 
 window.onload = function () {
-    const student = requireRole("student");
-    if (!student) return; // guard already redirected
+    const teacher = requireRole("teacher"); // this is the teacher dashboard
+    if (!teacher) return;
 
-    showGreeting(student);
-    showStats(student);
-    showQuickAccess(student);
+    showGreeting(teacher);
+    showStats();
+    showTools();
 };
 
-//    Greeting
-function showGreeting(student) {
-    greeting.textContent = `Welcome back ${firstName(student.fullName)},`;
+function showGreeting(teacher) {
+    greeting.textContent = `Welcome back ${firstName(teacher.fullName)},`;
 }
 
-//    Stat cards
-function showStats(student) {
-    const results = getResultsFor(student.id);
-    const activeExams = getActiveExams();
+// teacher-side totals pulled straight from storage
+function showStats() {
+    const users = readStore(KEYS.USERS); // read the users store
+    const exams = readStore(KEYS.EXAMS); // read the exams store
+    const results = readStore(KEYS.RESULTS); // read the results store
 
-    //  one result = one finished exam
-    statCompleted.textContent = results.length;
-
-    // Average
-    // exam can't outweigh a whole short exam.
-    statAverage.textContent = averagePercent(results) + "%";
-
-    // active exams this student still hasn't submitted.
-    const notTaken = activeExams.filter(
-        (exam) => !hasTakenExam(student.id, exam.id),
-    );
-    statIncomplete.textContent = notTaken.length;
+    statCompleted.textContent = users.filter(
+        (u) => u.role === "student",
+    ).length; // number of students
+    statAverage.textContent = exams.length; // number of exams
+    statIncomplete.textContent = results.length; // number of submitted results
 }
 
-function averagePercent(results) {
-    if (results.length === 0) return 0;
-
-    const sum = results.reduce(function (total, result) {
-        return total + (result.total ? (result.score / result.total) * 100 : 0);
-    }, 0);
-
-    return Math.round(sum / results.length);
-}
-
-//    Quick access
-function showQuickAccess(student) {
-    const available = getActiveExams()
-        .filter((exam) => !hasTakenExam(student.id, exam.id))
-        .slice(0, QUICK_ACCESS_LIMIT);
-
-    if (available.length === 0) {
-        examGrid.innerHTML = `
-      <div class="col-12">
-        <div class="empty">
-          <i class="bi bi-check2-circle"></i>
-          <p>You're all caught up</p>
-          <span>New exams appear here as soon as your teacher activates them.</span>
-        </div>
+// quick links to the teacher tools
+function showTools() {
+    examGrid.innerHTML = `
+      <div class="col-6 col-lg-3">
+        <a class="card exam-card" href="exam.html">
+          <h3 class="exam-card__title">Exams</h3>
+          <p class="exam-card__meta"><i class="bi bi-journal"></i> Create &amp; manage exams</p>
+        </a>
+      </div>
+      <div class="col-6 col-lg-3">
+        <a class="card exam-card" href="student.html">
+          <h3 class="exam-card__title">Students</h3>
+          <p class="exam-card__meta"><i class="bi bi-people"></i> Add &amp; manage students</p>
+        </a>
+      </div>
+      <div class="col-6 col-lg-3">
+        <a class="card exam-card" href="results.html">
+          <h3 class="exam-card__title">Results</h3>
+          <p class="exam-card__meta"><i class="bi bi-bar-chart"></i> View student results</p>
+        </a>
       </div>`;
-        return;
-    }
-
-    let cards = "";
-    available.forEach(function (exam) {
-        cards += renderExamCard(exam);
-    });
-    examGrid.innerHTML = cards;
 }

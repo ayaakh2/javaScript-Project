@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Result · Exam Tracker</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jersey+10&display=swap" rel="stylesheet">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="common.css">
+  <link rel="stylesheet" href="student-result.css">
+</head>
+
+<body class="result-body">
+
+  <!-- No sidebar: the only ways out are the two buttons on the card. -->
+  <main class="result-page">
+    <div class="result-stage" id="stage">
+
+      <!--   Artwork   -->
+      <div class="result-art">
+
+        <!--   PASS: balloons + confetti  
+           Entrance and looping animations are split across wrapper groups:
+           one element can only run one transform animation at a time. -->
+        <svg class="art u-hidden" id="artPass" viewBox="0 0 320 500" xmlns="http://www.w3.org/2000/svg" role="img"
+          aria-label="Celebrating figure with balloons">
+
+          <!-- ground shadow -->
+          <ellipse class="art-shadow" cx="163" cy="470" rx="72" ry="9" fill="#CFE9CF" />
+
+          <!-- free-floating balloons -->
+          <g class="rise rise--1">
+            <g class="balloon balloon--a">
+              <path d="M112 168 C112 200 100 205 104 232" stroke="#9CCB9A" stroke-width="1.5" fill="none" />
+              <ellipse cx="112" cy="150" rx="17" ry="20" fill="#A8D5A2" />
+              <ellipse cx="106" cy="143" rx="5" ry="7" fill="#C2E3BE" opacity=".8" />
+              <path d="M112 170 l-4 6 h8 z" fill="#8FC08B" />
+            </g>
+          </g>
+
+          <g class="rise rise--2">
+            <g class="balloon balloon--b">
+              <path d="M272 218 C272 246 262 250 266 272" stroke="#9CCB9A" stroke-width="1.5" fill="none" />
+              <ellipse cx="272" cy="202" rx="15" ry="18" fill="#A8D5A2" />
+              <ellipse cx="267" cy="196" rx="4" ry="6" fill="#C2E3BE" opacity=".8" />
+              <path d="M272 220 l-4 6 h8 z" fill="#8FC08B" />
+            </g>
+          </g>
+
+          <!-- confetti: each bit bursts outward once, then rains on its own clock -->
+          <g>
+            <g class="burst burst--1">
+              <rect class="bit bit--1" x="60" y="150" width="7" height="7" rx="1.5" fill="#FFBA42" />
+            </g>
+            <g class="burst burst--2">
+              <circle class="bit bit--2" cx="98" cy="176" r="3.5" fill="#A8D5A2" />
+            </g>
+            <g class="burst burst--3">
+              <rect class="bit bit--3" x="140" y="140" width="6" height="6" rx="1.5" fill="#F2A0B5" />
+            </g>
+            <g class="burst burst--4">
+              <circle class="bit bit--4" cx="188" cy="162" r="4" fill="#FFBA42" />
+            </g>
+            <g class="burst burst--5">
+              <rect class="bit bit--5" x="236" y="152" width="6" height="6" rx="1.5" fill="#A8D5A2" />
+            </g>
+            <g class="burst burst--6">
+              <circle class="bit bit--6" cx="284" cy="178" r="3" fill="#FFBA42" />
+            </g>
+            <g class="burst burst--7">
+              <rect class="bit bit--7" x="74" y="230" width="5" height="5" rx="1.5" fill="#F2A0B5" />
+            </g>
+            <g class="burst burst--8">
+              <circle class="bit bit--8" cx="126" cy="212" r="3.5" fill="#A8D5A2" />
+            </g>
+            <g class="burst burst--9">
+              <rect class="bit bit--9" x="166" y="238" width="6" height="6" rx="1.5" fill="#A8D5A2" />
+            </g>
+            <g class="burst burst--10">
+              <circle class="bit bit--10" cx="214" cy="206" r="3" fill="#F2A0B5" />
+            </g>
+            <g class="burst burst--11">
+              <rect class="bit bit--11" x="256" y="242" width="5" height="5" rx="1.5" fill="#FFBA42" />
+            </g>
+            <g class="burst burst--12">
+              <circle class="bit bit--12" cx="292" cy="252" r="3" fill="#A8D5A2" />
+            </g>
+            <g class="burst burst--13">
+              <rect class="bit bit--13" x="52" y="268" width="6" height="6" rx="1.5" fill="#A8D5A2" />
+            </g>
+            <g class="burst burst--14">
+              <circle class="bit bit--14" cx="150" cy="286" r="3.5" fill="#FFBA42" />
+            </g>
+            <g class="burst burst--15">
+              <rect class="bit bit--15" x="196" y="300" width="5" height="5" rx="1.5" fill="#F2A0B5" />
+            </g>
+            <g class="burst burst--16">
+              <circle class="bit bit--16" cx="248" cy="312" r="3" fill="#FFBA42" />
+            </g>
+          </g>
+
+          <!-- the figure and the balloon it is holding -->
+          <g class="hero-in">
+            <g class="hero">
+              <!-- held balloon -->
+              <path d="M224 218 C224 250 212 258 206 306" stroke="#D79B2E" stroke-width="1.8" fill="none" />
+              <ellipse cx="224" cy="196" rx="23" ry="27" fill="#FFBA42" />
+              <ellipse cx="216" cy="187" rx="6" ry="9" fill="#FFD489" opacity=".85" />
+              <path d="M224 222 l-5 8 h10 z" fill="#E8A32E" />
+
+              <!-- legs -->
+              <path d="M152 372 L128 448" stroke="#14202B" stroke-width="19" stroke-linecap="round" />
+              <path d="M176 372 L204 448" stroke="#14202B" stroke-width="19" stroke-linecap="round" />
+              <ellipse cx="124" cy="456" rx="17" ry="8" fill="#14202B" />
+              <ellipse cx="208" cy="456" rx="17" ry="8" fill="#14202B" />
+
+              <!-- torso -->
+              <path d="M141 306 q22 -10 44 0 l6 74 q-28 8 -56 0 z" fill="#A8D5A2" />
+
+              <!-- arms -->
+              <path d="M146 316 L112 372" stroke="#F0B49E" stroke-width="12" stroke-linecap="round" />
+              <path d="M182 314 L206 306" stroke="#F0B49E" stroke-width="12" stroke-linecap="round" />
+              <path d="M141 306 q22 -10 44 0 l4 22 q-26 8 -52 0 z" fill="#95C98F" />
+
+              <!-- head -->
+              <circle cx="163" cy="284" r="21" fill="#F0B49E" />
+              <path d="M142 280 a21 21 0 0 1 42 0 q-21 -12 -42 0 z" fill="#2C2438" />
+              <path d="M184 276 q8 -2 6 8 q-6 2 -6 -8 z" fill="#2C2438" />
+            </g>
+          </g>
+        </svg>
+
+        <!--   FAIL: sad face   -->
+        <svg class="art u-hidden" id="artFail" viewBox="0 0 320 400" xmlns="http://www.w3.org/2000/svg" role="img"
+          aria-label="Sad face">
+
+          <!-- faint scenery behind the face -->
+          <g opacity=".5">
+            <path d="M96 236 q40 -46 116 -40 q66 6 92 44 q-20 26 -104 28 q-88 2 -104 -32 z" fill="#F6EAE9" />
+            <rect x="150" y="196" width="86" height="34" rx="12" fill="#F6EAE9" />
+            <circle cx="132" cy="258" r="12" fill="#F6EAE9" />
+            <circle cx="252" cy="256" r="9" fill="#F6EAE9" />
+          </g>
+
+          <!-- small debris -->
+          <path class="leaf leaf--a" d="M212 178 q12 -8 18 2 q-10 10 -18 -2 z" fill="#E8B0AA" />
+          <path class="leaf leaf--b" d="M76 300 q10 -7 15 2 q-8 8 -15 -2 z" fill="#E8B0AA" />
+          <path class="leaf leaf--c" d="M238 318 q9 -6 13 2 q-7 7 -13 -2 z" fill="#E8B0AA" />
+
+          <!-- the face -->
+          <g class="face-in">
+            <g class="face">
+              <circle cx="146" cy="248" r="86" fill="#C96A63" />
+              <circle cx="118" cy="220" r="30" fill="#D07A73" opacity=".45" />
+
+              <!-- droopy closed eyes -->
+              <path d="M100 232 q18 20 38 2" stroke="#9E4A45" stroke-width="8" stroke-linecap="round" fill="none" />
+              <path d="M156 234 q18 20 38 -2" stroke="#9E4A45" stroke-width="8" stroke-linecap="round" fill="none" />
+
+              <!-- tears -->
+              <ellipse class="tear tear--a" cx="112" cy="250" rx="5" ry="7" fill="#8FC3F0" />
+              <ellipse class="tear tear--b" cx="186" cy="252" rx="4" ry="6" fill="#8FC3F0" />
+
+              <!-- open frowning mouth -->
+              <path class="mouth" d="M118 292 q28 -14 56 0 q4 30 -28 32 q-32 -2 -28 -32 z" fill="#4A3F52" />
+            </g>
+          </g>
+        </svg>
+
+      </div>
+
+      <!--   Card   -->
+      <section class="result-card" id="card">
+        <h1 class="result-card__title" id="title">&nbsp;</h1>
+        <p class="result-card__label">Your result is</p>
+        <p class="result-card__score" id="score">0/0</p>
+
+        <div class="result-card__actions">
+          <a class="btn btn--outline" href="student-dashboard.html">Back to Dashboard</a>
+          <a class="btn btn--accent-solid" id="reviewBtn" href="#">Review answers</a>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <script src="common.js"></script>
+  <script src="student-result.js"></script>
+</body>
+
+</html>

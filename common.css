@@ -1,4 +1,4 @@
-/*   Design tokens   */
+ /* Design tokens  */
 :root {
   /* brand */
   --c-primary:      #00537A;
@@ -13,15 +13,7 @@
   --c-text:         #0B2F42;
   --c-muted:        #6D8A99;
 
-  /* state */
-  --c-success:      #2E9E5B;
-  --c-success-soft: #E7F6ED;
-  --c-danger:       #D64545;
-  --c-danger-soft:  #FCEAEA;
-
-  
   --f-display: "Jersey 10", "Courier New", monospace;
-  --f-body:    "Jersey 10", "Courier New", monospace;
   --f-sidebar: "Jersey 25", "Jersey 10", "Courier New", monospace;
 
   /* scale */
@@ -37,17 +29,19 @@
   --transition: .18s ease;
 }
 
+/*    Reset   */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 html, body { height: 100%; }
 
 body {
-  font-family: var(--f-body);
+  font-family: var(--f-display);
   font-size: 18px;
   line-height: 1.5;
   letter-spacing: .4px;
   color: var(--c-text);
   background: var(--c-primary-dark);
+  -webkit-font-smoothing: antialiased;
 }
 
 a { color: inherit; text-decoration: none; }
@@ -62,8 +56,7 @@ img { max-width: 100%; display: block; }
   border-radius: 4px;
 }
 
-/*   Typography roles   */
-.display,
+/*  Typography  */
 h1, h2 {
   font-family: var(--f-display);
   font-weight: 400;
@@ -74,21 +67,20 @@ h1, h2 {
 h1 { font-size: 2rem; }
 h2 { font-size: 1.5rem; }
 
-h3, h4 {
-  font-family: var(--f-body);
+h3 {
+  font-family: var(--f-display);
   font-weight: 400;
 }
 
 .section-title {
-  font-family: var(--f-body);
+  font-family: var(--f-display);
   font-size: 1.2rem;
   color: var(--c-text);
   margin-bottom: 14px;
 }
 
-.muted { color: var(--c-muted); }
 
-/*   App shell   */
+/*  App shell   */
 .app {
   display: flex;
   min-height: 100vh;
@@ -135,7 +127,7 @@ h3, h4 {
 
 .nav-link:hover { background: rgba(255, 255, 255, .07); color: #fff; }
 
-/* Active item */
+/* Active item reads as a white tab cut into the main panel. */
 .nav-link.is-active {
   background: var(--c-bg);
   color: var(--c-primary-dark);
@@ -148,7 +140,7 @@ h3, h4 {
 .sidebar__foot .nav-link { color: #9FBCCB; }
 .sidebar__foot .nav-link:hover { color: #fff; }
 
-/* Mobile sidebar toggle  */
+/* Mobile sidebar toggle (hidden on desktop) */
 .sidebar-toggle {
   display: none;
   color: var(--c-primary-dark);
@@ -183,18 +175,12 @@ h3, h4 {
 }
 
 .topbar__greeting {
-  font-family: var(--f-body);
+  font-family: var(--f-display);
   font-size: 1.5rem;
   color: var(--c-primary-dark);
 }
 
 .topbar__sub { font-size: 1rem; color: var(--c-muted); }
-
-.topbar__actions {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
 
 .icon-btn {
   width: 34px;
@@ -220,15 +206,17 @@ h3, h4 {
   font-size: 1.25rem;
 }
 
-/*  Cards   */
+/*   Cards   */
+
 .card {
+  display: block;
   background: var(--c-surface);
   border: 1px solid var(--c-border);
   border-radius: var(--r-lg);
   box-shadow: var(--shadow-card);
 }
 
-/* Exam card  */
+/* Exam card */
 .exam-card {
   padding: 16px;
   height: 100%;
@@ -261,7 +249,7 @@ h3, h4 {
 
 .exam-card .btn { align-self: flex-start; margin-top: 4px; }
 
-/*    Buttons   */
+/*   Buttons   */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -288,8 +276,7 @@ h3, h4 {
 }
 .btn--ghost:hover { border-color: var(--c-primary); }
 
-.btn:disabled,
-.btn.is-disabled {
+.btn:disabled {
   background: #E4EDF2;
   color: var(--c-muted);
   cursor: not-allowed;
@@ -311,12 +298,8 @@ h3, h4 {
 
 /*    Utilities   */
 .u-hidden { display: none !important; }
-.u-sr-only {
-  position: absolute; width: 1px; height: 1px;
-  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
-}
 
-/*   Responsive   */
+/*    Responsive   */
 @media (max-width: 900px) {
   .sidebar {
     position: fixed;
@@ -332,9 +315,4 @@ h3, h4 {
   .sidebar-toggle { display: block; }
 
   .topbar { align-items: center; }
-}
-
-/*    Motion preferences   */
-@media (prefers-reduced-motion: reduce) {
-  * { animation: none !important; transition: none !important; }
 }
