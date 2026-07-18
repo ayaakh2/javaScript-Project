@@ -1,0 +1,347 @@
+.result-body {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background: var(--c-bg);
+  overflow-x: hidden;
+}
+
+.result-page {
+  width: 100%;
+  max-width: 1000px;
+  padding: 30px 20px;
+}
+
+.result-stage {
+  display: flex;
+  align-items: center;
+}
+
+/*   Artwork   */
+.result-art {
+  flex: 0 0 300px;
+  position: relative;
+  z-index: 2;
+  margin-right: -56px;   /* let the illustration sit over the card's edge */
+  pointer-events: none;
+}
+
+.art { width: 100%; height: auto; display: block; overflow: visible; }
+
+/* The sad face is a tighter composition, so it leans further in. */
+.result-stage--fail .result-art { flex-basis: 270px; margin-right: -84px; }
+
+/*   Card   */
+.result-card {
+  flex: 1;
+  min-width: 0;
+  position: relative;
+  z-index: 1;
+  padding: 48px 52px 44px 96px;
+  border-radius: 22px;
+  text-align: center;
+}
+
+.result-card--pass { background: #DFF2E0; }
+.result-card--fail { background: #FBE3E1; }
+
+.result-card__title {
+  font-family: var(--f-display);
+  font-size: 2.7rem;
+  line-height: 1.1;
+  letter-spacing: 1px;
+  margin-bottom: 40px;
+}
+
+.result-card--pass .result-card__title { color: #3D8B4A; }
+.result-card--fail .result-card__title { color: #8E2B2B; }
+
+.result-card__label {
+  font-size: 1.5rem;
+  color: #14202B;
+}
+
+.result-card__score {
+  font-size: 4.4rem;
+  line-height: 1.05;
+  letter-spacing: 2px;
+  color: #14202B;
+}
+
+.result-card__actions {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 40px;
+}
+
+.result-card .btn { font-size: 1.05rem; padding: 9px 20px; }
+
+.btn--outline {
+  background: #fff;
+  border: 2px solid var(--c-accent);
+  color: var(--c-text);
+}
+
+.btn--outline:hover { background: #FFF7E8; }
+
+.btn--accent-solid { background: var(--c-accent); color: #fff; }
+.btn--accent-solid:hover { background: var(--c-accent-dark); }
+
+   /* Animations
+   Only run on the visit straight after submitting; result.js adds .is-static
+   when the page is opened from history instead. */
+
+
+.result-body.is-static *,
+.result-body.is-static *::before,
+.result-body.is-static *::after { animation: none !important; }
+
+/*   Card entrance, choreographed   */
+.result-card--pass { animation: card-rise .55s cubic-bezier(.2, .9, .3, 1.25) both; }
+.result-card--fail { animation: card-rise .45s ease-out both, card-shake .55s ease-in-out .45s 1; }
+
+@keyframes card-rise {
+  from { opacity: 0; transform: translateY(26px) scale(.94); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes card-shake {
+  0%, 100% { transform: translateX(0) rotate(0deg); }
+  15% { transform: translateX(-9px) rotate(-.6deg); }
+  32% { transform: translateX(8px)  rotate(.5deg); }
+  50% { transform: translateX(-6px) rotate(-.35deg); }
+  68% { transform: translateX(4px)  rotate(.2deg); }
+  85% { transform: translateX(-2px) rotate(0deg); }
+}
+
+/* The card's contents arrive after the card itself, one beat apart. */
+.result-card__title { animation: title-pop .5s cubic-bezier(.2, 1.5, .4, 1) .3s both; }
+.result-card__label { animation: fade-up .45s ease-out .5s both; }
+.result-card__score { animation: score-pop .5s cubic-bezier(.2, 1.4, .4, 1) .6s both; }
+.result-card__actions { animation: fade-up .45s ease-out .85s both; }
+
+@keyframes title-pop {
+  from { opacity: 0; transform: scale(.6) translateY(10px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes score-pop {
+  from { opacity: 0; transform: scale(.55); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+   /* PASS */
+
+/*   Entrances   */
+.hero-in {
+  transform-box: fill-box;
+  transform-origin: bottom center;
+  animation: hero-in .55s cubic-bezier(.2, 1.3, .4, 1) both;
+}
+
+@keyframes hero-in {
+  from { opacity: 0; transform: translateY(30px) scale(.9); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.rise { transform-box: fill-box; transform-origin: center; }
+.rise--1 { animation: rise-in .9s cubic-bezier(.2, .8, .3, 1) .25s both; }
+.rise--2 { animation: rise-in .9s cubic-bezier(.2, .8, .3, 1) .45s both; }
+
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(90px) scale(.7); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/*   The jump: crouch, launch, hang, land, settle   */
+.hero {
+  transform-box: fill-box;
+  transform-origin: bottom center;
+  animation: hero-jump 2.6s cubic-bezier(.4, 0, .5, 1) .6s infinite;
+}
+
+@keyframes hero-jump {
+  0%   { transform: translateY(0) scale(1, 1); }
+  10%  { transform: translateY(3px) scale(1.05, .94); }    /* crouch */
+  26%  { transform: translateY(-30px) scale(.95, 1.07); }  /* launch, stretched */
+  40%  { transform: translateY(-38px) scale(1, 1); }       /* hang */
+  56%  { transform: translateY(-30px) scale(.97, 1.04); }
+  70%  { transform: translateY(0) scale(1.07, .9); }       /* land, squashed */
+  80%  { transform: translateY(0) scale(.98, 1.03); }      /* rebound */
+  90%  { transform: translateY(0) scale(1.01, .99); }
+  100% { transform: translateY(0) scale(1, 1); }
+}
+
+/* Shadow tracks the jump — small and faint at the apex. */
+.art-shadow {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: shadow-track 2.6s cubic-bezier(.4, 0, .5, 1) .6s infinite;
+}
+
+@keyframes shadow-track {
+  0%   { transform: scale(1, 1);     opacity: 1; }
+  10%  { transform: scale(1.06, 1);  opacity: 1; }
+  40%  { transform: scale(.6, 1);    opacity: .45; }
+  70%  { transform: scale(1.12, 1);  opacity: 1; }
+  100% { transform: scale(1, 1);     opacity: 1; }
+}
+
+/*   Loose balloons drift on their own clocks   */
+.balloon { transform-box: fill-box; transform-origin: bottom center; }
+.balloon--a { animation: drift 4.2s ease-in-out infinite; }
+.balloon--b { animation: drift 5.3s ease-in-out .7s infinite reverse; }
+
+@keyframes drift {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  33%      { transform: translate(5px, -12px) rotate(4deg); }
+  66%      { transform: translate(-4px, -6px) rotate(-3deg); }
+}
+
+/*   Confetti: one burst outward, then a steady rain   */
+.burst { transform-box: fill-box; transform-origin: center; }
+
+.burst--1  { animation: burst-out .7s cubic-bezier(.1, .9, .3, 1) both; --bx: -46px; --by: -30px; }
+.burst--2  { animation: burst-out .7s cubic-bezier(.1, .9, .3, 1) .04s both; --bx: -32px; --by: -14px; }
+.burst--3  { animation: burst-out .7s cubic-bezier(.1, .9, .3, 1) .08s both; --bx: -14px; --by: -38px; }
+.burst--4  { animation: burst-out .7s cubic-bezier(.1, .9, .3, 1) .12s both; --bx: 10px;  --by: -30px; }
+.burst--5  { animation: burst-out .7s cubic-bezier(.1, .9, .3, 1) .06s both; --bx: 34px;  --by: -26px; }
+.burst--6  { animation: burst-out .7s cubic-bezier(.1, .9, .3, 1) .1s both;  --bx: 52px;  --by: -12px; }
+.burst--7  { animation: burst-out .7s cubic-bezier(.1, .9, .3, 1) .14s both; --bx: -50px; --by: 8px; }
+.burst--8  { animation: burst-out .7s cubic-bezier(.1, .9, .3, 1) .02s both; --bx: -26px; --by: 0px; }
+.burst--9  { animation: burst-out .7s cubic-bezier(.1, .9, .3, 1) .16s both; --bx: -6px;  --by: 14px; }
+.burst--10 { animation: burst-out .7s cubic-bezier(.1, .9, .3, 1) .09s both; --bx: 18px;  --by: -2px; }
+.burst--11 { animation: burst-out .7s cubic-bezier(.1, .9, .3, 1) .13s both; --bx: 40px;  --by: 12px; }
+.burst--12 { animation: burst-out .7s cubic-bezier(.1, .9, .3, 1) .18s both; --bx: 56px;  --by: 22px; }
+.burst--13 { animation: burst-out .7s cubic-bezier(.1, .9, .3, 1) .05s both; --bx: -54px; --by: 26px; }
+.burst--14 { animation: burst-out .7s cubic-bezier(.1, .9, .3, 1) .11s both; --bx: -12px; --by: 34px; }
+.burst--15 { animation: burst-out .7s cubic-bezier(.1, .9, .3, 1) .15s both; --bx: 22px;  --by: 40px; }
+.burst--16 { animation: burst-out .7s cubic-bezier(.1, .9, .3, 1) .2s both;  --bx: 46px;  --by: 46px; }
+
+@keyframes burst-out {
+  from { transform: translate(0, 0) scale(.2); }
+  to   { transform: translate(var(--bx), var(--by)) scale(1); }
+}
+
+.bit {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: rain 3s linear infinite;
+}
+
+.bit--1  { animation-duration: 3.4s; animation-delay: .7s; }
+.bit--2  { animation-duration: 2.8s; animation-delay: 1.1s; }
+.bit--3  { animation-duration: 3.9s; animation-delay: 1.6s; }
+.bit--4  { animation-duration: 3.1s; animation-delay: 2s; }
+.bit--5  { animation-duration: 4.2s; animation-delay: .9s; }
+.bit--6  { animation-duration: 2.6s; animation-delay: 2.4s; }
+.bit--7  { animation-duration: 3.6s; animation-delay: 1.4s; }
+.bit--8  { animation-duration: 3.3s; animation-delay: 2.8s; }
+.bit--9  { animation-duration: 4.5s; animation-delay: 1.8s; }
+.bit--10 { animation-duration: 2.9s; animation-delay: 2.6s; }
+.bit--11 { animation-duration: 3.8s; animation-delay: 1.2s; }
+.bit--12 { animation-duration: 3.2s; animation-delay: 3.1s; }
+.bit--13 { animation-duration: 4.1s; animation-delay: .8s; }
+.bit--14 { animation-duration: 3.5s; animation-delay: 2.2s; }
+.bit--15 { animation-duration: 2.7s; animation-delay: 3.4s; }
+.bit--16 { animation-duration: 4.4s; animation-delay: 1.5s; }
+
+@keyframes rain {
+  0%   { opacity: 0; transform: translate(0, -40px) rotate(0deg); }
+  10%  { opacity: 1; }
+  75%  { opacity: 1; }
+  100% { opacity: 0; transform: translate(14px, 150px) rotate(420deg); }
+}
+
+   /* FAIL */
+.face-in {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: face-drop .75s cubic-bezier(.3, 1.35, .5, 1) both;
+}
+
+@keyframes face-drop {
+  from { opacity: 0; transform: translateY(-44px) scale(.82); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* A slow, heavy sigh — deliberately slower than the pass animation. */
+.face {
+  transform-box: fill-box;
+  transform-origin: center top;
+  animation: face-sigh 4.5s ease-in-out .75s infinite;
+}
+
+@keyframes face-sigh {
+  0%, 100% { transform: translateY(0) rotate(0deg) scale(1, 1); }
+  35%      { transform: translateY(6px) rotate(-2deg) scale(1.02, .98); }
+  70%      { transform: translateY(2px) rotate(1deg) scale(1, 1); }
+}
+
+.mouth {
+  transform-box: fill-box;
+  transform-origin: center top;
+  animation: mouth-wobble 4.5s ease-in-out .75s infinite;
+}
+
+@keyframes mouth-wobble {
+  0%, 100% { transform: scale(1, 1); }
+  35%      { transform: scale(.94, 1.22); }
+  70%      { transform: scale(1.04, .96); }
+}
+
+/* Tears well up, roll down the cheek, then fade. */
+.tear {
+  transform-box: fill-box;
+  transform-origin: center top;
+  opacity: 0;
+}
+
+.tear--a { animation: tear-roll 3.6s ease-in 1s infinite; }
+.tear--b { animation: tear-roll 3.6s ease-in 2.6s infinite; }
+
+@keyframes tear-roll {
+  0%   { opacity: 0; transform: translateY(0) scale(.4, .4); }
+  12%  { opacity: 1; transform: translateY(2px) scale(1, 1); }
+  22%  { transform: translateY(4px) scale(.9, 1.15); }
+  70%  { opacity: 1; transform: translateY(56px) scale(.8, 1.25); }
+  85%  { opacity: 0; transform: translateY(70px) scale(.6, .6); }
+  100% { opacity: 0; transform: translateY(70px) scale(.4, .4); }
+}
+
+.leaf { transform-box: fill-box; transform-origin: center; }
+.leaf--a { animation: leaf-sway 4.4s ease-in-out infinite; }
+.leaf--b { animation: leaf-sway 5.2s ease-in-out .8s infinite reverse; }
+.leaf--c { animation: leaf-sway 3.8s ease-in-out 1.4s infinite; }
+
+@keyframes leaf-sway {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  50%      { transform: translate(-5px, 6px) rotate(-12deg); }
+}
+
+/*   Responsive   */
+@media (max-width: 860px) {
+  .result-stage { flex-direction: column; }
+
+  .result-art,
+  .result-stage--fail .result-art {
+    flex-basis: auto;
+    width: 210px;
+    margin: 0 0 -34px;
+  }
+
+  .result-card {
+    width: 100%;
+    padding: 54px 24px 32px;
+  }
+
+  .result-card__title { font-size: 2.1rem; margin-bottom: 26px; }
+  .result-card__score { font-size: 3.4rem; }
+  .result-card__actions { flex-wrap: wrap; }
+}

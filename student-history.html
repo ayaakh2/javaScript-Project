@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Grades &amp; History · Exam Tracker</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jersey+10&family=Jersey+25&display=swap" rel="stylesheet">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="common.css">
+  <link rel="stylesheet" href="student-history.css">
+</head>
+
+<body>
+
+  <div class="app">
+
+    <!--   Sidebar   -->
+    <div class="sidebar__backdrop" id="sidebarBackdrop"></div>
+
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar__brand">Exam Tracker</div>
+
+      <nav class="sidebar__nav">
+        <a class="nav-link" href="student-dashboard.html"><i class="bi bi-bar-chart-fill"></i> Dashboard</a>
+        <a class="nav-link" href="student-available-exam.html"><i class="bi bi-journal-text"></i> Exams</a>
+        <a class="nav-link is-active" href="student-history.html"><i class="bi bi-clock-history"></i> Grades &amp;
+          History</a>
+        <a class="nav-link" href="student-profile.html"><i class="bi bi-person-circle"></i> Profile</a>
+      </nav>
+
+      <div class="sidebar__foot">
+        <a class="nav-link" href="#" id="logoutBtn"><i class="bi bi-box-arrow-left"></i> Logout</a>
+      </div>
+    </aside>
+
+    <!--   Main   -->
+    <main class="main">
+
+      <div class="d-flex align-items-center gap-2 mb-3">
+        <button class="sidebar-toggle" id="sidebarToggle" aria-label="Open menu">
+          <i class="bi bi-list"></i>
+        </button>
+      </div>
+
+      <!--   Summary: hidden until the student has at least one result   -->
+      <section class="row g-3 summary u-hidden" id="summary" aria-label="Your grades">
+
+        <div class="col-12 col-lg-4">
+          <article class="card summary-card">
+            <div class="donut">
+              <svg viewBox="0 0 120 120" class="donut__svg" aria-hidden="true">
+                <circle class="donut__track" cx="60" cy="60" r="52" />
+                <circle class="donut__ring" cx="60" cy="60" r="52" id="donutRing" />
+              </svg>
+              <span class="donut__value" id="donutValue">0%</span>
+            </div>
+
+            <div class="summary-card__body">
+              <p class="summary-card__line" id="completedLine">You have completed 0 exams</p>
+              <p class="summary-card__band" id="bandLine">&nbsp;</p>
+            </div>
+          </article>
+        </div>
+
+        <div class="col-12 col-lg-4">
+          <article class="card summary-card summary-card--best">
+            <i class="bi bi-trophy-fill best__icon"></i>
+
+            <div class="best__body">
+              <p class="best__title">Highest Score</p>
+              <p class="best__score" id="bestScore">0/0</p>
+              <p class="best__exam" id="bestExam">&nbsp;</p>
+            </div>
+          </article>
+        </div>
+
+      </section>
+
+      <!--   History   -->
+      <section aria-label="Exam history">
+        <h2 class="section-title u-hidden" id="historyTitle">History</h2>
+        <div class="row g-3" id="historyGrid"></div>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="common.js"></script>
+  <script src="student-history.js"></script>
+</body>
+
+</html>

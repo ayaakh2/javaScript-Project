@@ -1,0 +1,157 @@
+.profile-main {
+  position: relative;
+  overflow: hidden;
+}
+
+.decor {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 0;
+  pointer-events: none;
+
+  --rect-w: clamp(115px, 19vw, 250px);
+  --rect-h: clamp(230px, 38vw, 500px);
+}
+
+.decor__rect {
+  position: absolute;
+  width: var(--rect-w);
+  height: var(--rect-h);
+  border-radius: clamp(12px, 2vw, 26px);
+  background: #CFE2F0;
+  transform: rotate(30deg);
+}
+
+/* Upper: sits in from the right, two-thirds of it above the frame. */
+.decor__rect--top {
+  top: calc(var(--rect-h) * -0.66);
+  right: clamp(46px, 7.5vw, 100px);
+}
+
+/* Lower: overlaps the upper one and runs a quarter of its width off-edge. */
+.decor__rect--bottom {
+  top: calc(var(--rect-h) * -0.16);
+  right: calc(var(--rect-w) * -0.25);
+}
+
+.profile-stage {
+  position: relative;   /* sit above .decor */
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: clamp(20px, 4vw, 40px);
+  min-height: 72vh;
+}
+
+/*   Card   */
+.profile-card {
+  /* Shrinks with the viewport rather than forcing the art off the page. */
+  flex: 0 0 clamp(290px, 32vw, 390px);
+  padding: clamp(22px, 3vw, 32px) clamp(18px, 2.6vw, 34px) clamp(24px, 3vw, 36px);
+  text-align: center;
+}
+
+.avatar {
+  width: 116px;
+  height: 116px;
+  margin: 0 auto 16px;
+}
+
+.avatar__svg { width: 100%; height: 100%; display: block; }
+
+.profile-name {
+  font-size: 1.85rem;
+  color: var(--c-primary-dark);
+  overflow-wrap: anywhere;
+}
+
+.profile-role {
+  font-size: 1.15rem;
+  color: var(--c-muted);
+  margin-top: -4px;
+}
+
+/*   Fields   */
+/* Columns are sized to their content and the pair is centred as a block,
+   so the labels stay left-aligned but the group sits mid-card rather than
+   being pinned to the left padding by two equal 1fr tracks. */
+.fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, max-content));
+  justify-content: center;
+  gap: 26px clamp(22px, 4vw, 54px);
+  margin-top: clamp(24px, 3vw, 32px);
+  text-align: left;
+}
+
+.field { min-width: 0; }
+
+.field__label {
+  font-size: 1.05rem;
+  color: var(--c-muted);
+}
+
+.field__value {
+  font-size: 1.35rem;
+  color: var(--c-text);
+  overflow-wrap: anywhere;
+}
+
+/*   Side illustration   */
+.profile-art {
+  flex: 1;
+  min-width: 0;
+  display: grid;
+  place-items: center;
+}
+
+/* phone / browser on the left, figure on the right. */
+.art {
+  width: 100%;
+  max-width: 460px;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  top: 200px;
+}
+
+/* Male: the browser is a small card floating beside a much taller figure,
+   so it centres against him rather than sharing his baseline. */
+#artMale {
+  align-items: center;
+  gap: clamp(16px, 3vw, 34px);
+}
+
+#artMale .art__object { height: clamp(84px, 12vw, 150px); }
+#artMale .art__figure { height: clamp(140px, 20vw, 250px); }
+
+/* Female: the phone stands on the ground, so it shares her baseline. */
+#artFemale {
+  align-items: flex-end;
+  gap: clamp(14px, 2.5vw, 26px);
+}
+
+#artFemale .art__object { height: clamp(168px, 23vw, 290px); }
+#artFemale .art__figure { height: clamp(142px, 19.5vw, 245px); }
+
+   /* Responsive   */
+@media (max-width: 900px) {
+  .profile-art { display: none; }
+
+  .profile-stage {
+    display: block;      /* one child left — no flex row to arrange */
+    min-height: 0;
+  }
+
+  .profile-card {
+    width: 100%;
+    max-width: 440px;
+    margin: 0 auto;
+  }
+
+  /* With the art gone the corner is the only thing behind the card, so it
+     can spread a little wider. */
+  .decor { --rect-w: clamp(96px, 26vw, 150px); --rect-h: clamp(190px, 52vw, 300px); }
+  .decor__rect--top { right: clamp(34px, 10vw, 60px); }
+}

@@ -1,0 +1,147 @@
+.summary { margin-bottom: 30px; }
+
+.summary-card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 18px;
+  height: 100%;
+}
+
+/*   Donut   */
+.donut {
+  position: relative;
+  width: 98px;
+  height: 98px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+}
+
+.donut__svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);   /* start the ring at 12 o'clock */
+}
+
+.donut__track {
+  fill: none;
+  stroke: #D9DEE1;
+  stroke-width: 15;
+}
+
+.donut__ring {
+  fill: none;
+  stroke: var(--c-accent);
+  stroke-width: 15;
+  stroke-linecap: round;
+  /* dasharray + dashoffset are set by history.js from the real percentage */
+  transition: stroke-dashoffset 1s cubic-bezier(.2, .8, .3, 1);
+}
+
+.donut__value {
+  position: absolute;
+  font-size: 2.3rem;
+  color: var(--c-primary-dark);
+  letter-spacing: 1px;
+}
+
+.summary-card__body { min-width: 0; }
+
+.summary-card__line {
+  font-size: 1.3rem;
+  line-height: 1.4;
+  color: var(--c-muted);
+}
+
+.summary-card__band {
+  margin-top: 12px;
+  font-size: 1.5rem;
+  color: var(--c-primary);
+}
+
+/* A failing average shouldn't read as praise. */
+.summary-card__band--low { color: #A83535; }
+
+/*   Highest score   */
+.summary-card--best { gap: 18px; }
+
+.best__icon {
+  font-size: 3.4rem;
+  color: var(--c-accent);
+  line-height: 1;
+}
+
+.best__body { text-align: center; }
+
+.best__title {
+  font-size: 1.65rem;
+  color: var(--c-primary-dark);
+}
+
+.best__score {
+  margin-top: 4px;
+  font-size: 2.6rem;
+  line-height: 1.1;
+  color: var(--c-primary);
+  letter-spacing: 1px;
+}
+
+.best__exam {
+  font-size: 1.1rem;
+  color: var(--c-muted);
+  overflow-wrap: anywhere;
+}
+
+/*   History cards   */
+.hist-card {
+  padding: 16px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.hist-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-pop);
+}
+
+.hist-card__title {
+  font-size: 1.3rem;
+  color: var(--c-primary-dark);
+  overflow-wrap: anywhere;
+}
+
+.hist-card__meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.05rem;
+  color: var(--c-muted);
+}
+
+.hist-card__meta i { color: var(--c-primary); font-size: .95rem; }
+
+.hist-card__status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.05rem;
+}
+
+.hist-card__status--pass { color: #2E7D4F; }
+.hist-card__status--fail { color: #A83535; }
+
+.hist-card__status i { font-size: .95rem; }
+
+.hist-card .btn { align-self: flex-start; margin-top: 4px; }
+
+/*   Responsive   */
+@media (max-width: 520px) {
+  .summary-card { flex-direction: column; text-align: center; gap: 16px; }
+  .summary-card--best { gap: 16px; }
+}

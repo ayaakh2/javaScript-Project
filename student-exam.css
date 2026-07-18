@@ -1,0 +1,227 @@
+/* Centre the whole exam block in the viewport. */
+.exam-body {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background: var(--c-bg);
+}
+
+.exam-page {
+  width: 100%;
+  max-width: 980px;
+  padding: 26px 20px 34px;
+  font-family: var(--f-display);
+  letter-spacing: .5px;
+}
+
+/*   Topbar   */
+.exam-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+.exam-top__title {
+  font-family: var(--f-display);
+  font-size: 1.6rem;
+  color: var(--c-primary-dark);
+}
+
+/* Ending an exam is irreversible */
+.btn--danger {
+  background: #E5A5A5;
+  color: #5C1A1A;
+  padding: 8px 18px;
+}
+
+.btn--danger:hover { background: #D98A8A; }
+
+/* Every button on this page follows the page font. */
+.exam-page .btn {
+  font-family: var(--f-display);
+  font-size: 1.05rem;
+  letter-spacing: .5px;
+}
+
+/*   Exam card   */
+.exam-shell { padding: 24px 28px 30px; }
+
+.exam-shell__rule {
+  border: none;
+  border-top: 1px solid var(--c-border);
+  margin: 22px auto;
+  width: 72%;
+  opacity: 1;
+}
+
+/*   Question bubbles   */
+.bubbles {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.bubble {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--r-pill);
+  display: grid;
+  place-items: center;
+  font-family: var(--f-display);
+  font-size: 1.1rem;
+  background: #fff;
+  border: 1px solid var(--c-border);
+  color: var(--c-muted);
+  transition: transform var(--transition);
+}
+
+.bubble:hover { transform: translateY(-2px); }
+
+/* Current question, still blank — blue ring so it reads as "you are here". */
+.bubble.is-current {
+  border: 2px solid var(--c-primary);
+  color: var(--c-primary);
+}
+
+/* Answered */
+.bubble.is-answered {
+  background: var(--c-primary);
+  border-color: var(--c-primary);
+  color: #fff;
+}
+
+/* Current AND answered — darkest of the four. */
+.bubble.is-answered.is-current {
+  background: var(--c-primary-dark);
+  border-color: var(--c-primary-dark);
+  color: #fff;
+}
+
+/* Paging arrows for when the strip overflows */
+.bubble-arrow {
+  width: 30px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  color: var(--c-primary);
+  font-size: 1.1rem;
+}
+
+.bubble-arrow:disabled { color: var(--c-border); cursor: not-allowed; }
+
+/*   Question   */
+.question__heading {
+  font-family: var(--f-display);
+  font-size: 1.5rem;
+  color: var(--c-primary-dark);
+  margin-bottom: 14px;
+  letter-spacing: .5px;
+}
+
+/* The one place Alata is used. */
+.question__text {
+  font-family: "Alata", var(--f-body);
+  font-size: .95rem;
+  line-height: 1.75;
+  letter-spacing: normal;
+  color: #3F5C6B;
+  overflow-wrap: anywhere;
+}
+
+.question__hint {
+  margin-top: 12px;
+  font-size: 1rem;
+  color: var(--c-primary);
+}
+
+/*   Options   */
+.options { display: flex; flex-direction: column; gap: 6px; }
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  padding: 8px 12px;
+  border-radius: var(--r-md);
+  text-align: left;
+  transition: background var(--transition);
+}
+
+.option:hover { background: #F1F7FA; }
+
+.option.is-selected { background: #F4F9FB; }
+
+.option__marker {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border-radius: var(--r-pill);
+  border: 1px solid var(--c-border);
+  background: #fff;
+  font-family: var(--f-display);
+  font-size: 1rem;
+  color: var(--c-muted);
+  transition: background var(--transition), color var(--transition);
+}
+
+/* Square marker = more than one answer allowed. */
+.option__marker--square { border-radius: 8px; }
+
+.option.is-selected .option__marker {
+  background: var(--c-primary-dark);
+  border-color: var(--c-primary-dark);
+  color: #fff;
+}
+
+.option__text {
+  font-family: var(--f-display);
+  font-size: 1.1rem;
+  color: var(--c-text);
+  overflow-wrap: anywhere;
+}
+
+/*   Short answer   */
+.short-answer {
+  width: 100%;
+  padding: 10px 16px;
+  font-family: var(--f-display);
+  font-size: 1.25rem;
+  letter-spacing: .5px;
+  color: var(--c-text);
+  background: #fff;
+  border: 2px solid var(--c-border);
+  border-radius: var(--r-md);
+  outline: none;
+}
+
+.short-answer:focus { border-color: var(--c-primary); }
+
+.short-answer__label {
+  display: block;
+  margin-bottom: 8px;
+  font-family: var(--f-display);
+  font-size: 1rem;
+  color: var(--c-muted);
+}
+
+/*   Footer nav   */
+.exam-foot {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.exam-foot .btn { min-width: 92px; }
+
+@media (max-width: 600px) {
+  .exam-shell { padding: 18px 16px 22px; }
+  .exam-shell__rule { width: 100%; }
+}
