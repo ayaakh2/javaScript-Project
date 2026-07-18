@@ -1,0 +1,125 @@
+   :root {
+            --primary-blue: #004d73;
+            --bg-light-blue: #d4e7f2;
+            --bg-form-light: #f7fbfd;
+            --text-dark: #1a252c;
+        }
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: "Jersey 10";
+            background-color: #f0f4f8;
+        }
+
+        /* --------------Login-------------  */
+        .login-container {
+            min-height: 100vh;
+        }
+        .illustration-section {
+            background-color: var(--bg-light-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        .illustration-img {
+            max-width: 80%;
+            height: auto;
+            object-fit: contain;
+        }
+        .form-section {
+            background-color: var(--bg-form-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem;
+        }
+        .login-box {
+            width: 100%;
+            max-width: 420px;
+        }
+        .logo-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        .custom-logo {
+            font-size: 3rem;
+            color: var(--primary-blue);
+            line-height: 1;
+            position: relative;
+            display: inline-block;
+        }
+        .welcome-title {
+            color: var(--primary-blue);
+            font-weight:500;
+            font-size: 3.2rem;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .sub-title {
+            color: #6c757d;
+            font-size: 1.5rem;
+            margin-bottom: 2.5rem;
+            text-align: center;
+        }
+
+        .form-control {
+            border: 1px solid #dbdbdb;
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            background-color: #ffffff;
+            color: var(--text-dark);
+            box-shadow: none !important;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-blue);
+        }
+
+        .input-group-text {
+            background-color: #ffffff;
+            border: 1px solid #dbdbdb;
+            border-left: none;
+            border-radius: 0 8px 8px 0;
+            cursor: pointer;
+            color: #6c757d;
+        }
+
+        .password-field {
+            border-right: none;
+            border-radius: 8px 0 0 8px;
+        }
+
+        .btn-login {
+            background-color: var(--primary-blue);
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            padding: 0.75rem;
+            /* font-weight: 600; */
+            font-size: 1.7rem;
+            width: 100%;
+            margin-top: 2rem;
+            transition: background-color 0.2s ease;
+        }
+
+        .btn-login:hover {
+            background-color: #003652;
+            color: #ffffff;
+        }
+
+        @media (max-width: 576px) {
+            .illustration-section {
+                display: none; 
+            }
+            .form-section {
+                min-height: 100vh;
+            }
+        }
+
+
+        /* -----------Home----------- */
+        

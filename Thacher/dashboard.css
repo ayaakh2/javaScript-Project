@@ -1,0 +1,74 @@
+/*   Stat cards   */
+.stats { margin-bottom: 28px; }
+
+.stat {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 20px;
+  height: 100%;
+}
+
+.stat__icon {
+  font-size: 2rem;
+  color: var(--c-accent);
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.stat__body { min-width: 0; }
+
+.stat__value {
+  font-family: var(--f-display);
+  font-size: 2.4rem;
+  line-height: 1;
+  color: var(--c-primary);
+  letter-spacing: 1px;
+}
+
+.stat__label {
+  font-size: 1.05rem;
+  color: var(--c-muted);
+  margin-top: 2px;
+}
+
+.section-title{
+  color: var(--c-muted);
+  margin-bottom: 20px;
+}
+
+.Exams_table{
+  background-color: #ffffff;
+  border: 1px solid;
+  border-radius: 25px;
+  padding: 20px;
+  
+}
+table{
+  margin: 5px !important;
+  height: auto;
+  width: 100%;
+  color: var(--c-muted);
+  text-align: center;
+  border-spacing: 0 10px;
+  border-collapse: separate; 
+}
+
+th{
+  height: auto;
+  border-bottom: 1px solid;
+  color: var(--c-primary);
+}
+.status{
+ border-radius: 25px;
+ width: 150px;
+}
+.active{
+  background-color: rgba(60, 179, 113,0.2 );
+  color: var(--c-success);
+ 
+}
+.inactive{
+  background-color: rgba(255, 99, 71, 0.2);
+  color: var(--c-danger);
+}

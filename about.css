@@ -1,0 +1,132 @@
+        /* ربط الـ Design Tokens الخاصة بالتيم */
+        :root {
+            --primary-blue: var(--c-primary, #00537A);
+            --secondary-orange: var(--c-accent, #FFBA42);
+            --bg-cards-section: #e1eff6;
+            --text-dark: var(--c-text, #0B2F42);
+        }
+
+        /* إجبار الصفحة كاملة على خط Jersey 10 بناءً على طلبك وملف التيم */
+        body, button, input, a, span, p, div {
+            font-family: var(--f-body, "Jersey 10", "Courier New", monospace) !important;
+            letter-spacing: .6px;
+        }
+
+        body {
+            background-color: #ffffff !important;
+            color: var(--text-dark) !important;
+            font-size: 19px;
+        }
+
+        h1, h2, h3, h4, h5, h6, .navbar-brand {
+            font-family: var(--f-display, "Jersey 10", "Courier New", monospace) !important;
+            font-weight: 400;
+        }
+
+        /* Navbar Custom Styling */
+        .navbar {
+            padding: 1rem 2rem;
+            background-color: #ffffff;
+        }
+        .nav-link {
+            color: var(--c-muted) !important;
+            margin: 0 10px;
+            font-size: 1.2rem;
+        }
+        .nav-link.active {
+            color: var(--primary-blue) !important;
+            border-bottom: 3px solid var(--secondary-orange);
+        }
+        .btn-nav-login {
+            background-color: var(--primary-blue);
+            color: #fff !important;
+            border-radius: var(--r-pill, 999px);
+            padding: 0.3rem 1.8rem;
+            font-size: 1.2rem;
+            transition: background var(--transition);
+        }
+        .btn-nav-login:hover {
+            background-color: var(--c-primary-dark);
+        }
+
+        /* Top Header Area (About Us Title Section) */
+        .header-section {
+            background-color: #ffffff;
+            padding: 3rem 2rem 5rem 2rem;
+            position: relative;
+        }
+        .page-title {
+            color: var(--primary-blue);
+            font-size: 3.5rem;
+            margin-bottom: 0;
+            padding-left: 2rem;
+        }
+
+        /* Wave Effect Flipped (المنحنى العلوي) */
+        .wave-top-container {
+            background-color: #ffffff;
+            position: relative;
+            height: 80px;
+        }
+
+        /* Content Sections */
+        .content-section {
+            padding: 2rem 2rem 5rem 2rem;
+            background-color: #ffffff;
+        }
+        .content-title {
+            color: var(--primary-blue);
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+        }
+        .content-text {
+            color: var(--c-muted);
+            font-size: 1.25rem;
+            line-height: 1.4;
+        }
+
+        /* Why Choose Us Section (مع المنحنى السفلي الانسيابي المصلح) */
+        .why-choose-section {
+            background-color: var(--bg-cards-section);
+            padding: 0 2rem 5rem 2rem;
+            position: relative;
+        }
+        .section-title-center {
+            color: var(--text-dark);
+            font-size: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        /* Info Cards */
+        .info-card {
+            background: var(--c-surface);
+            border: 1px solid var(--c-border);
+            border-radius: var(--r-lg);
+            padding: 2.5rem 1.8rem;
+            text-align: center;
+            box-shadow: var(--shadow-card);
+            height: 100%;
+            transition: box-shadow var(--transition);
+        }
+        .info-card:hover {
+            box-shadow: var(--shadow-pop);
+        }
+        .card-title-orange {
+            color: var(--secondary-orange);
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+        }
+        .card-desc {
+            color: var(--c-muted);
+            font-size: 1.2rem;
+            line-height: 1.4;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--c-primary-dark);
+            color: #ffffff;
+            padding: 1.2rem 2rem;
+            text-align: center;
+            font-size: 1.2rem;
+        }

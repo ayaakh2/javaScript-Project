@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student_Administration</title>
+    <link rel="stylesheet" href="../CSS/Teacher.css">
+</head>
+<body>
+    <div id="add">
+        <form>
+            <label>Full Name</label>
+            <input id="Full_Name" type="text">
+            <label>username</label>
+            <input id="username" type="text">
+            <label>password</label>
+            <input id="password" type="password">
+            <label>phone</label>
+            <input id="phone" type="text">
+            <label>male</label>
+            <input id="male" type="radio" name="Gender">
+            <label>female</label>
+            <input id="female" type="radio" name="Gender">
+            <label>national ID</label>
+            <input id="nationalId" type="text">
+            <input id="submit" type="button" value="Add Student">
+            <input id="edit" type="button" value="Edit Student" style="display: none;">
+        </form>
+    </div>
+    <hr>
+    <div id="search">
+    <input id="search_name" type="text">
+    <input id="search_btn" type="button" value="Search">
+    <hr>
+    </div>
+    <div id="show"></div>
+    <div id="show_results"></div>
+    <div id="show_answer"></div>
+    
+    
+    <script src="student.js"></script>
+</body>
+</html>
